@@ -1,12 +1,4 @@
-from config import HEX_PARA_MARIE, OPCODES_MARIE, OPS_SEM_ENDERECO, CONDICOES_SKIPCOND
-
-MAPEAMENTO = {
-    '0': '0000', '1': '0001', '2': '0010', '3': '0011',
-    '4': '0100', '5': '0101', '6': '0110', '7': '0111',
-    '8': '1000', '9': '1001', 'A': '1010', 'B': '1011',
-    'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'
-}
-mapeamento_inv = {v: k for k, v in MAPEAMENTO.items()}
+from config import HEX_PARA_MARIE, OPCODES_MARIE, OPS_SEM_ENDERECO, CONDICOES_SKIPCOND, MAPEAMENTO, MAPEAMENTO_INV
 
 def marie_para_hex(instrucao_str): # LOAD 015
     instrucao_list = instrucao_str.split()
@@ -47,15 +39,6 @@ def binario_para_hex(bin_str):
     # for pegando string a cada 4 caracteres
     for i in range(0, len(bin_str), 4):
         string = bin_str[i:i+4]
-        hex_code += mapeamento_inv.get(string)
+        hex_code += MAPEAMENTO_INV.get(string)
 
     return hex_code
-
-def marie_para_binario(instrucao_str):
-    hex_code = marie_para_hex(instrucao_str)
-    return hex_para_binario(hex_code)
-
-def binario_para_marie(bin_code):
-    hex_code = binario_para_hex
-    return hex_para_marie
-

@@ -16,24 +16,31 @@ def main():
             #identificar o tipo de entrada
             tipo = tipo_entrada(entrada)
             if tipo == "bin":
-                codigo_hex = conversores.binario_para_hex(entrada)
-                codigo_marie = conversores.hex_para_marie(codigo_hex)
-                print("Saída MARIE: " + codigo_marie)
-                print("Saída Hexadecimal: " + codigo_hex)
+                while True:
+                    codigo_hex = conversores.binario_para_hex(entrada)
+                    codigo_marie = conversores.hex_para_marie(codigo_hex)
+                    print("Saída MARIE: " + codigo_marie)
+                    print("Saída Hexadecimal: " + codigo_hex)
+                    if input() != "Sim":
+                        break
 
             elif tipo == "marie":
-                codigo_hex = conversores.marie_para_hex(entrada)
-                codigo_bin = conversores.hex_para_binario(codigo_hex)
-                print("Saída Binária: " + codigo_bin)
-                print("Saída Hexadecimal: " + codigo_hex)
+                while True:
+                    codigo_hex = conversores.marie_para_hex(entrada)
+                    codigo_bin = conversores.hex_para_binario(codigo_hex)
+                    print("Saída Binária: " + codigo_bin)
+                    print("Saída Hexadecimal: " + codigo_hex)
+                    if input() != "Sim":
+                        break
 
             elif tipo == "hex":
-                codigo_marie = conversores.hex_para_marie(entrada)
-                codigo_binario = conversores.hex_para_binario(entrada)
-                print("Saída MARIE: " + codigo_marie)
-                print("Saída Binária: " + codigo_binario)
-
-            break
+                while True:
+                    codigo_marie = conversores.hex_para_marie(entrada)
+                    codigo_binario = conversores.hex_para_binario(entrada)
+                    print("Saída MARIE: " + codigo_marie)
+                    print("Saída Binária: " + codigo_binario)
+                    if input() != "Sim":
+                        break
 
 
 if __name__ == "__main__":
