@@ -1,7 +1,11 @@
-def tipo_entrada(entrada_str):
-    if len(entrada_str) > 16:
-        return "bin"
-    if len(entrada_str) > 4:
-        return "marie"
+def validador_marie(marie_str):
+    if marie_str is None:
+        return False
 
-    return "hex"
+def validador_hex(hex_str):
+    if hex_str is None or len(hex_str) != 4:
+        return False
+    
+def validador_bin(bin_str):
+    if bin_str is None or len(bin_str) != 16:
+        return False
