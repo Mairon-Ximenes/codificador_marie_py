@@ -1,3 +1,5 @@
+from typing import Any
+
 from config import HEX_PARA_MARIE, OPCODES_MARIE, OPS_SEM_ENDERECO, CONDICOES_SKIPCOND
 
 def marie_para_hex(instrucao_str): # LOAD 015
@@ -14,7 +16,15 @@ def marie_para_hex(instrucao_str): # LOAD 015
     return hex_code
 
 def hex_para_marie(hex_str):
-    pass
+    opcode = hex_str[0] # 1
+    segunda_parte = hex_str[1:] # 015
+    marie_code = HEX_PARA_MARIE.get(opcode) # LOAD
+
+    if marie_code in OPS_SEM_ENDERECO:
+        return marie_code
+
+    marie_code += " " + segunda_parte
+    return marie_code
 
 def hex_para_binario(hex_str):
     pass

@@ -11,8 +11,9 @@ def main():
         print()
         while True:
             entrada = input("Informe o dado de entrada: ").upper()
-            hex_code = conversores.marie_para_hex(entrada)
-            print(hex_code)
+            #hex_code = conversores.marie_para_hex(entrada)
+            codigo = conversores.hex_para_marie(entrada)
+            print(codigo)
             break
 
 
