@@ -1,52 +1,51 @@
-from config import *
+from config import OPCODES_MARIE, HEX_PARA_MARIE, OPS_SEM_ENDERECO, MAPEAMENTO, MAPEAMENTO_INV
 
-def marie_para_hex(instrucao_str): # LOAD 015
-    instrucao_list = instrucao_str.split()
+def marie_para_hex(instrucao_str):
+    instrucao_list = instrucao_str.upper().split()
     opcode = instrucao_list[0]
     hex_code = OPCODES_MARIE.get(opcode)
-    if hex_code is None : return "Erro"
 
     if opcode in OPS_SEM_ENDERECO:
-        hex_code += "000"
-        return hex_code
+        return hex_code + "000"
 
-    segunda_parte = instrucao_list[1]
-    hex_code += str(segunda_parte)
-    return hex_code
+    endereco = instrucao_list[1]
+    return hex_code + endereco
+
 
 def hex_para_marie(hex_str):
-    opcode = hex_str[0] # 1
-    segunda_parte = hex_str[1:] # 015
-    marie_code = HEX_PARA_MARIE.get(opcode) # LOAD
-    if marie_code is None : return "Erro"
+    hex_clean = hex_str.strip().upper()
+    opcode_hex = hex_clean[0]
+    segunda_parte = hex_clean[1:]
+    marie_code = HEX_PARA_MARIE.get(opcode_hex)
 
     if marie_code in OPS_SEM_ENDERECO:
         return marie_code
 
-    marie_code += " " + segunda_parte
-    return marie_code.title()
+    if marie_code == "SKIPCOND":
+        return f"Skipcond {segunda_parte}"
+
+    nome_formatado = marie_code.title()
+    return f"{nome_formatado} {segunda_parte}"
+
 
 def hex_para_binario(hex_str):
-    bin_code = MAPEAMENTO.get(hex_str[0]) # '1'014
-    if bin_code is None : return "Erro"
+    hex_str = hex_str.strip().upper()
+    bin_code = ""
 
-    for char in hex_str[1:]:
-        bin_code += " "
-        bin_char = MAPEAMENTO.get(char)
-        if bin_char is None : return "Erro"
-        bin_code += bin_char
+    for char in hex_str:
+        if bin_code:
+            bin_code += " "
+        bin_code += MAPEAMENTO.get(char)
 
     return bin_code
 
+
 def binario_para_hex(bin_str):
-    bin_str = bin_str.replace(" ", "")
+    bin_clean = bin_str.replace(" ", "").strip()
     hex_code = ""
 
-    # for pegando string a cada 4 caracteres
-    for i in range(0, len(bin_str), 4):
-        string = bin_str[i:i+4]
-        hex_char = MAPEAMENTO_INV.get(string)
-        if hex_char is None : return "Erro"
-        hex_code += hex_char
+    for i in range(0, len(bin_clean), 4):
+        grupo = bin_clean[i:i+4]
+        hex_code += MAPEAMENTO_INV.get(grupo)
 
     return hex_code
