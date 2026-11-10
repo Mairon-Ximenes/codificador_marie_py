@@ -13,7 +13,8 @@ def main():
             entrada = input("Informe o dado de entrada: ").upper()
             #codigo = conversores.marie_para_hex(entrada)
             #codigo = conversores.hex_para_marie(entrada)
-            codigo = conversores.hex_para_binario(entrada)
+            #codigo = conversores.hex_para_binario(entrada)
+            codigo = conversores.binario_para_hex(entrada)
             print(codigo)
             break
 
