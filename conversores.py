@@ -29,7 +29,7 @@ def hex_para_marie(hex_str):
         return marie_code
 
     marie_code += " " + segunda_parte
-    return marie_code
+    return marie_code.title()
 
 def hex_para_binario(hex_str):
     bin_code = MAPEAMENTO.get(hex_str[0]) # '1'014

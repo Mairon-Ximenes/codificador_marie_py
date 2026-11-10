@@ -1,4 +1,6 @@
 import conversores
+from validadores import tipo_entrada
+
 
 def main():
     print("==========CODIFICADOR MARIE==========\n")
@@ -10,12 +12,27 @@ def main():
     if num == 3:
         print()
         while True:
-            entrada = input("Informe o dado de entrada: ").upper()
-            #codigo = conversores.marie_para_hex(entrada)
-            #codigo = conversores.hex_para_marie(entrada)
-            #codigo = conversores.hex_para_binario(entrada)
-            codigo = conversores.binario_para_hex(entrada)
-            print(codigo)
+            entrada = input("Entrada: ").upper()
+            #identificar o tipo de entrada
+            tipo = tipo_entrada(entrada)
+            if tipo == "bin":
+                codigo_hex = conversores.binario_para_hex(entrada)
+                codigo_marie = conversores.hex_para_marie(codigo_hex)
+                print("Saída MARIE: " + codigo_marie)
+                print("Saída Hexadecimal: " + codigo_hex)
+
+            elif tipo == "marie":
+                codigo_hex = conversores.marie_para_hex(entrada)
+                codigo_bin = conversores.hex_para_binario(codigo_hex)
+                print("Saída Binária: " + codigo_bin)
+                print("Saída Hexadecimal: " + codigo_hex)
+
+            elif tipo == "hex":
+                codigo_marie = conversores.hex_para_marie(entrada)
+                codigo_binario = conversores.hex_para_binario(entrada)
+                print("Saída MARIE: " + codigo_marie)
+                print("Saída Binária: " + codigo_binario)
+
             break
 
 
