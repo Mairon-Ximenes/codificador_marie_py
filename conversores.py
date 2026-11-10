@@ -6,6 +6,7 @@ MAPEAMENTO = {
     '8': '1000', '9': '1001', 'A': '1010', 'B': '1011',
     'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'
 }
+mapeamento_inv = {v: k for k, v in MAPEAMENTO.items()}
 
 def marie_para_hex(instrucao_str): # LOAD 015
     instrucao_list = instrucao_str.split()
@@ -41,7 +42,6 @@ def hex_para_binario(hex_str):
 
 def binario_para_hex(bin_str):
     bin_str = bin_str.replace(" ", "")
-    mapeamento_inv = {v: k for k, v in MAPEAMENTO.items()}
 
     hex_code = ""
     # for pegando string a cada 4 caracteres
@@ -50,4 +50,12 @@ def binario_para_hex(bin_str):
         hex_code += mapeamento_inv.get(string)
 
     return hex_code
+
+def marie_para_binario(instrucao_str):
+    hex_code = marie_para_hex(instrucao_str)
+    return hex_para_binario(hex_code)
+
+def binario_para_marie(bin_code):
+    hex_code = binario_para_hex
+    return hex_para_marie
 
