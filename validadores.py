@@ -1,4 +1,4 @@
-from config import OPCODES_MARIE, HEX_PARA_MARIE, OPS_SEM_ENDERECO, CONDICOES_SKIPCOND, MAPEAMENTO_INV
+from config import *
 
 def validador_marie(marie_str):
     if not marie_str:
@@ -16,7 +16,8 @@ def validador_marie(marie_str):
 
     # 2) instruções sem endereço não podem ter argumentos adicionais
     if opcode in OPS_SEM_ENDERECO:
-        return len(partes) == 1
+        if len(partes) != 1:
+            return False
 
     # 3) validação do SKIPCOND (tem que ser 000, 400 ou 800)
     if opcode == "SKIPCOND":
@@ -29,13 +30,16 @@ def validador_marie(marie_str):
     if opcode not in OPS_SEM_ENDERECO and opcode != "SKIPCOND":
         if len(partes) != 2:
             return False
+
         endereco = partes[1]
         if len(endereco) != 3:
             return False
+
         for c in endereco:
             if c not in "0123456789ABCDEF":
                 return False
 
+    # se passou por tudo, a instrução é válida
     return True
 
 
@@ -76,9 +80,12 @@ def validador_bin(bin_str):
 
     bin_limpo = bin_str.replace(" ", "").strip()
 
-    if len(bin_limpo) != 16 or not all(c in "01" for c in bin_limpo):
+    if len(bin_limpo) != 16:
         return False
 
+    for c in bin_limpo:
+        if c not in "01":
+            return False
     # converte o binário limpo para hexadecimal
     hex_equiv = ""
     for i in range(0, 16, 4):
@@ -86,4 +93,7 @@ def validador_bin(bin_str):
         hex_equiv += MAPEAMENTO_INV.get(grupo, "")
 
     # reutiliza as regras semânticas do validador hexadecimal
-    return validador_hex(hex_equiv)
+    if not validador_hex(hex_equiv):
+        return False
+
+    return True

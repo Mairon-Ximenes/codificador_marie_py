@@ -20,7 +20,7 @@ def hex_para_marie(hex_str):
     if marie_code in OPS_SEM_ENDERECO:
         return marie_code
 
-    return (marie_code + " " + segunda_parte).title()
+    return marie_code.title() + " " + segunda_parte.upper()
 
 def hex_para_binario(hex_str):  
     bin_code = ""
@@ -38,6 +38,6 @@ def binario_para_hex(bin_str):
     # for pegando string a cada 4 caracteres
     for i in range(0, len(bin_str), 4):
         string = bin_str[i:i+4]
-        hex_code += MAPEAMENTO_INV.get(string)
+        hex_code += MAPEAMENTO_INV.get(string).upper()
 
     return hex_code
