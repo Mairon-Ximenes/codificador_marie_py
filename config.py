@@ -1,3 +1,4 @@
+# Dictionary com os opcodes
 OPCODES_MARIE = {
     "JNS": "0",
     "LOAD": "1",
@@ -24,6 +25,7 @@ OPS_SEM_ENDERECO = {"HALT", "INPUT", "OUTPUT", "CLEAR"}
 # Condições válidas permitidas para a instrução SKIPCOND
 CONDICOES_SKIPCOND = {"000", "400", "800"}
 
+# Mapeamento dos valores dos numeros hexadecimais
 MAPEAMENTO = {
     '0': '0000', '1': '0001', '2': '0010', '3': '0011',
     '4': '0100', '5': '0101', '6': '0110', '7': '0111',
@@ -31,4 +33,5 @@ MAPEAMENTO = {
     'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'
 }
 
+# Mapeamento invertido dos números hexadecimais. Ex: {'2': '0010'} -> {'0010': '2'}
 MAPEAMENTO_INV = {v: k for k, v in MAPEAMENTO.items()}
